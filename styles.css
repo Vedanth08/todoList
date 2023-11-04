@@ -1,0 +1,90 @@
+
+body{
+    background-color: #071952;
+}
+
+.card-header{
+    background-color: #35A29F;
+}
+
+.todoHeading{
+    text-align: center;
+    
+}
+
+.card-body{
+    background-color: #97FEED;
+}
+
+.todoList{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width:80%;
+    min-width: 60%;
+}
+
+.listItems{
+    margin-top: 15px;
+    background-color: #91C8E4;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.inputElement{
+    border: 1px solid #D8D9DA;
+    border-radius: 5px;
+    margin-top: 10px;
+    height: 3pc;
+
+}
+
+.addButton{
+    margin-top: 20px;
+}
+
+.removeButton{
+    background-color: #91C8E4;
+    border: none;
+    margin-right: 10px;
+    margin-top: 12px;
+}
+
+.removeButton:hover{
+    color: red;
+}
+
+
+.MytaskHeading{
+    margin-top: 30px;
+}
+
+.taskList{
+    margin-top: 20px;
+    padding-left: 0px;
+}
+
+.listItems{
+    list-style: none;
+}
+
+.labelElement{
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+
+
+/* ---------------------------------------------- */
+.example{
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.checked{
+    text-decoration: line-through;
+}
+
+
+
