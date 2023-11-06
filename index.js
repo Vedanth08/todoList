@@ -8,6 +8,8 @@ var savetaskElement = document.getElementById('saveButton');
 
 var listarray = [];
 
+
+
 function addTask() {
 
     let userInputvalue = inputElement.value;
@@ -61,6 +63,21 @@ function addTask() {
     removeTaskbutton.classList.add('bi', 'bi-trash', 'removeButton', 'position-absolute', 'end-0', 'translate-middle', 'align-center');
     
     listItems.appendChild(removeTaskbutton);
+
+
+    // ..... (  Update the ID of the listItems ) ............................
+
+    listItems.id = "listItems" + listarray.length;
+
+    let newId = listarray.length;
+
+    let todoList = { 
+        username: userInputvalue, 
+        ID: newId,
+        ischecked : false
+    };
+
+    listarray.push(todoList);
     
 
     // ..... (  Implementing check box check label strike operation ) ............................
@@ -70,31 +87,19 @@ function addTask() {
         todoListelementContainer.removeChild(listItems);
     }
 
-
     // ..... (  Implementing check box check label strike operation ) ............................
 
     checkboxElement.onclick = function () {
 
-        if (checkboxElement.checked){
+        labelElement.classList.toggle('checked');
 
-            labelElement.style.textDecoration = "line-through";
-        }
-
-        else{
-            labelElement.style.textDecoration = "none";
-        }
     }
 
+    // Creating the ID's for all the elements
 
-    // ..... (  Update the ID of the listItems ) ............................
-
-    listItems.id = "listItems" + listarray.length;
-
-    let newId = listarray.length;
-
-    let todoList = { username: userInputvalue, ID: newId };
-
-    listarray.push(todoList);
+    labelElement.id = labelElement+newId;
+    
+    checkboxElement.id = checkboxElement + newId;
 
     return listarray;
 
@@ -133,16 +138,18 @@ function loadTasks() {
 
         listarray.forEach(function (task) {
 
-            addTaskToList(task.username);
+            addTaskToList(task.username, task.ischecked);
 
         });
     }
 }
 
 
+// Local Storage Implementation operation ********************************
+
 // ..... ( Helper function to add a task to the list after storing the list into the local storage and displaying after the reload too ) ............................
 
-function addTaskToList(username) {
+function addTaskToList(username, ischecked) {
 
 
     // ..... (  Created the list item ) ............................
@@ -161,6 +168,8 @@ function addTaskToList(username) {
     checkboxElement.type = "checkbox"
 
     checkboxElement.classList.add('checkbox-input');
+
+    checkboxElement.checked = ischecked;
 
     listItems.appendChild(checkboxElement);
 
@@ -195,21 +204,31 @@ function addTaskToList(username) {
 
     };
 
+
     // ..... (  Implementing check box check label strike operation ) ............................
+
 
     checkboxElement.onclick = function () {
 
-        if (checkboxElement.checked){
+        ischecked = checkboxElement.checked;
 
-            labelElement.style.textDecoration = "line-through";
-        }
+        updateTaskInListArray(username, ischecked);
 
-        else{
-            labelElement.style.textDecoration = "none";
-        }
+        const stringifyResult = JSON.stringify(listarray);
+
+        localStorage.setItem("todoList", stringifyResult);
+
+
+    }
+
+    if(ischecked){
+
+        labelElement.classList.toggle('checked');
+
     }
 
 }
+
 
 // ..... ( removing the stored value in the local storage and upadting the local storage after the deletion ) ............................
 
@@ -223,4 +242,23 @@ function removeTaskFromLocalStorage(username) {
     
 }
 
+
+// function to update the 'ischecked' property in the listarray
+
+function updateTaskInListArray(username, ischecked) {
+
+    for (let i = 0; i < listarray.length; i++) {
+
+        if (listarray[i].username === username) {
+
+            listarray[i].ischecked = ischecked;
+
+            break;
+        }
+    }
+}
+
+
+
 loadTasks();
+

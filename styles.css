@@ -86,5 +86,9 @@ body{
     text-decoration: line-through;
 }
 
+.unchecked{
+    text-decoration: none;
+}
+
 
 
