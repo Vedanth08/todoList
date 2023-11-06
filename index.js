@@ -259,6 +259,5 @@ function updateTaskInListArray(username, ischecked) {
 }
 
 
-
 loadTasks();
 
