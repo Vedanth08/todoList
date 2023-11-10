@@ -210,6 +210,8 @@ function addTaskToList(username, ischecked) {
 
     checkboxElement.onclick = function () {
 
+        labelElement.classList.toggle('checked');
+
         ischecked = checkboxElement.checked;
 
         updateTaskInListArray(username, ischecked);
@@ -218,12 +220,6 @@ function addTaskToList(username, ischecked) {
 
         localStorage.setItem("todoList", stringifyResult);
 
-
-    }
-
-    if(ischecked){
-
-        labelElement.classList.toggle('checked');
 
     }
 
